@@ -85,10 +85,11 @@ def create_output_image(model_type, image, output):
         # Scale the output text by the image shape
         scaler = max(int(image.shape[0] / 1000), 1)
         # Write the text of color and type onto the image
+        # cv2.putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]]) → None
         image = cv2.putText(image,
                             "Color: {}, Type: {}".format(color, car_type),
-                            (50 * scaler, 100 * scaler), cv2.FONT_HERSHEY_SIMPLEX,
-                            2 * scaler, (255, 255, 255), 3 * scaler)
+                            (2 * scaler, 100 * scaler), cv2.FONT_HERSHEY_COMPLEX_SMALL,
+                            1 * scaler, (255, 255, 255), 1* scaler)
         return image
     else:
         print("Unknown model type, unable to create output image.")
@@ -130,7 +131,7 @@ def perform_inference(args):
     print(args)
     mystr = args.i
     m = mystr.split('/')[-1]
-    cv2.imwrite("/home/mohitp/openvino/outputs/output_{}.png".format(m), output_image)
+    cv2.imwrite("/home/mohitp/openvino/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0]), output_image)
 
 
 def main():
