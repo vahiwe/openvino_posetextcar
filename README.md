@@ -18,18 +18,6 @@ If you do want a sneak preview of some of the code that interfaces with the Infe
 you can check it out in `inference.py`. You'll work out of the `handle_models.py` file, as 
 well as adding functions calls within the edge app in `app.py`.
 
-## TODOs
-
-In `handle_models.py`, you will need to implement `handle_pose`, `handle_text`, and
-`handle_car`.
-
-In `app.py`, first, you'll need to use the input shape of the network to call the `preprocessing`
-function. Then, you need to call `handle_output` with the appropriate model argument 
-in order to get the right handling function. With that function, you can then feed the output
-of the inference request in in order to extract the output. 
-
-Note that there is some additional post-processing done for you in `create_output_image`
-within `app.py` to help display the output back onto the input image.
 
 ## Testing the apps
 
