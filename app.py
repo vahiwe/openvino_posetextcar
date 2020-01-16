@@ -4,6 +4,7 @@ import numpy as np
 
 from handle_models import handle_output, preprocessing
 from inference import Network
+from openvino_api.settings import BASE_DIR
 
 CAR_COLORS = ["white", "gray", "yellow", "red", "green", "blue", "black"]
 CAR_TYPES = ["car", "bus", "truck", "van"]
@@ -128,10 +129,9 @@ def perform_inference(args):
     output_image = create_output_image(args.t, image, processed_output)
 
     # Save down the resulting image
-    print(args)
     mystr = args.i
     m = mystr.split('/')[-1]
-    cv2.imwrite("/home/mohitp/openvino/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0]), output_image)
+    cv2.imwrite(BASE_DIR+"/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0]), output_image)
 
 
 def main():
