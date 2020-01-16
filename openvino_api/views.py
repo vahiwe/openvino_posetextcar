@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.decorators.csrf import csrf_exempt
 
-from app import main
+from openvino_api.app import main
 
 @csrf_exempt
 def StartApp(request):
