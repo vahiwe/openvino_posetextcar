@@ -4,11 +4,13 @@ import numpy as np
 
 from handle_models import handle_output, preprocessing
 from inference import Network
+from openvino_api.settings import BASE_DIR
 
 CAR_COLORS = ["white", "gray", "yellow", "red", "green", "blue", "black"]
 CAR_TYPES = ["car", "bus", "truck", "van"]
 
 
+# NOT IN USE RIGHT NOW
 def get_args():
     """
     Gets the arguments from the command line.
@@ -89,7 +91,7 @@ def create_output_image(model_type, image, output):
         image = cv2.putText(image,
                             "Color: {}, Type: {}".format(color, car_type),
                             (2 * scaler, 100 * scaler), cv2.FONT_HERSHEY_COMPLEX_SMALL,
-                            1 * scaler, (255, 255, 255), 1* scaler)
+                            1 * scaler, (255, 255, 255), 1 * scaler)
         return image
     else:
         print("Unknown model type, unable to create output image.")
@@ -104,10 +106,10 @@ def perform_inference(args):
     # Create a Network for using the Inference Engine
     inference_network = Network()
     # Load the model in the network, and obtain its input shape
-    n, c, h, w = inference_network.load_model(args.m, args.d, args.c)
+    n, c, h, w = inference_network.load_model(args["m"], args["d"], args["c"])
 
     # Read the input image
-    image = cv2.imread(args.i)
+    image = cv2.imread(args["i"])
 
     # TODO: Preprocess the input image
     preprocessed_image = preprocessing(image, h, w)
@@ -121,21 +123,25 @@ def perform_inference(args):
     # TODO: Handle the output of the network, based on args.t
     # Note: This will require using `handle_output` to get the correct
     #       function, and then feeding the output to that function.
-    output_func = handle_output(args.t)
+    output_func = handle_output(args["t"])
     processed_output = output_func(output, image.shape)
 
     # Create an output image based on network
-    output_image = create_output_image(args.t, image, processed_output)
+    output_image = create_output_image(args["t"], image, processed_output)
 
     # Save down the resulting image
-    print(args)
-    mystr = args.i
+    mystr = args["i"]
     m = mystr.split('/')[-1]
-    cv2.imwrite("/home/mohitp/openvino/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0]), output_image)
+    cv2.imwrite(BASE_DIR + "/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0]), output_image)
 
 
-def main():
-    args = get_args()
+def main(image, type, model):
+    args = {"c": "/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libcpu_extension_sse4.so",
+            "d": "CPU",
+            "i": str(BASE_DIR) + "/images/" + str(image),
+            "m": str(BASE_DIR) + str(model),
+            "t": str(type)
+            }
     perform_inference(args)
 
 
