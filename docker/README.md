@@ -1,4 +1,3 @@
-```bash
 # To build a docker images
 docker build --rm --build-arg proxy=$http_proxy --rm --tag openvino:v1 .
 
@@ -10,4 +9,3 @@ docker run -v /etc/localtime:/etc/localtime:ro --rm -it -e DISPLAY=$DISPLAY -v /
 
 # To mount the camera and access camera from docker env
 docker run -v /etc/localtime:/etc/localtime:ro --rm -it --device /dev/video0 -e http_proxy -e https_proxy -e ftp_proxy -v `pwd`:/work openvino:v1 bash
-```
