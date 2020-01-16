@@ -2,8 +2,8 @@ import argparse
 import cv2
 import numpy as np
 
-from handle_models import handle_output, preprocessing
-from inference import Network
+from openvino_api.handle_models import handle_output, preprocessing
+from openvino_api.inference import Network
 from openvino_api.settings import BASE_DIR
 
 CAR_COLORS = ["white", "gray", "yellow", "red", "green", "blue", "black"]
