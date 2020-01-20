@@ -31,7 +31,7 @@ def StartApp(request):
         elif type == 'POSE':
             model = "/models/human-pose-estimation-0001.xml"
         else:
-            return HttpResponse("wrong type")
+            return render(request, "home.html")
         fs = FileSystemStorage()
         fs.save(image.name, image)
         res = main(image, type, model)
