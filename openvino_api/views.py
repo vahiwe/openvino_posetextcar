@@ -29,4 +29,4 @@ def StartApp(request):
     fs = FileSystemStorage()
     fs.save(image.name, image)
     res = main(image, type, model)
-    return HttpResponse(res)
+    return HttpResponse("Inference Successful")
