@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from openvino_api.app import main
 
+
 @csrf_exempt
 def StartApp(request):
     try:
@@ -27,6 +28,6 @@ def StartApp(request):
     else:
         return HttpResponse("wrong type")
     fs = FileSystemStorage()
-    fs.save(image.name, image)
-    res = main(image, type, model)
+    img = fs.save(image.name, image)
+    main(img, type, model)
     return HttpResponse("Inference Successful")
