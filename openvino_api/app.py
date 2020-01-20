@@ -132,7 +132,10 @@ def perform_inference(args):
     # Save down the resulting image
     mystr = args["i"]
     m = mystr.split('/')[-1]
-    cv2.imwrite(BASE_DIR + "/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0]), output_image)
+    file_name = BASE_DIR + "/static/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0])
+    view_file = ".." + "/static/outputs/output_{}.png".format(m.split('/')[-1].split('.')[0])
+    cv2.imwrite(file_name, output_image)
+    return view_file
 
 
 def main(image, type, model):
@@ -142,7 +145,7 @@ def main(image, type, model):
             "m": str(BASE_DIR) + str(model),
             "t": str(type)
             }
-    perform_inference(args)
+    return perform_inference(args)
 
 
 if __name__ == "__main__":

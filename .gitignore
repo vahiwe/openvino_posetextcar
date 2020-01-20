@@ -15,7 +15,7 @@ thumbnail_kvstore.dat
 src/
 
 *.pid
-
+.vscode/
 # Test scripts
 test_scripts/*
 prospector.txt
