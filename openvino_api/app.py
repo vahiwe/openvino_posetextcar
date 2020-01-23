@@ -139,7 +139,7 @@ def perform_inference(args):
 
 
 def main(image, type, model):
-    args = {"c": "/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libcpu_extension_sse4.so",
+    args = {"c": "C:\IntelSWTools\openvino_2019.2.275\deployment_tools\inference_engine\\bin\intel64\Release\cpu_extension_avx2.dll",
             "d": "CPU",
             "i": str(BASE_DIR) + "/images/" + str(image),
             "m": str(BASE_DIR) + str(model),
