@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from openvino_api.app import main
 
+
 @csrf_exempt
 def StartApp(request):
     if request.method == 'POST':
